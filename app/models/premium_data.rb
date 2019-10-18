@@ -1,2 +1,0 @@
-class PremiumData < ApplicationRecord
-end

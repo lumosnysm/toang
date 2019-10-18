@@ -1,6 +1,6 @@
-class CreateDatas < ActiveRecord::Migration[5.2]
+class CreateAirInfos < ActiveRecord::Migration[5.2]
   def change
-    create_table :datas do |t|
+    create_table :air_infos do |t|
       t.references :node
       t.string :city
       t.string :country
