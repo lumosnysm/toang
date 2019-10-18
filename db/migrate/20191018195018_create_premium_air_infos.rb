@@ -1,7 +1,7 @@
-class CreatePremiumDatas < ActiveRecord::Migration[5.2]
+class CreatePremiumAirInfos < ActiveRecord::Migration[5.2]
   def change
-    create_table :premium_datas do |t|
-      t.references :data
+    create_table :premium_air_infos do |t|
+      t.references :air_info
       t.integer :p1_conc
       t.integer :p1_aqius
       t.integer :p1_aqicn

@@ -1,0 +1,2 @@
+class PremiumAirInfo < ApplicationRecord
+end

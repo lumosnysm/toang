@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "datas", force: :cascade do |t|
+  create_table "air_infos", force: :cascade do |t|
     t.bigint "node_id"
     t.string "city"
     t.string "country"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
     t.integer "ws"
     t.integer "aqius"
     t.integer "aqicn"
-    t.index ["node_id"], name: "index_datas_on_node_id"
+    t.index ["node_id"], name: "index_air_infos_on_node_id"
   end
 
   create_table "nodes", force: :cascade do |t|
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
     t.index ["user_id"], name: "index_nodes_on_user_id"
   end
 
-  create_table "premium_datas", force: :cascade do |t|
-    t.bigint "data_id"
+  create_table "premium_air_infos", force: :cascade do |t|
+    t.bigint "air_info_id"
     t.integer "p1_conc"
     t.integer "p1_aqius"
     t.integer "p1_aqicn"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
     t.integer "co_conc"
     t.integer "co_aqius"
     t.integer "co_aqicn"
-    t.index ["data_id"], name: "index_premium_datas_on_data_id"
+    t.index ["air_info_id"], name: "index_premium_air_infos_on_air_info_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "type", default: 0
+    t.integer "type_id", default: 0
     t.string "key"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

@@ -1,0 +1,2 @@
+class AirInfo < ApplicationRecord
+end
