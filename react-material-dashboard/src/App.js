@@ -28,7 +28,7 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-          <Routes />
+          <Routes current_user = {this.props.current_user} />
         </Router>
       </ThemeProvider>
     );

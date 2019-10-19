@@ -17,7 +17,7 @@ import {
   NotFound as NotFoundView
 } from './views';
 
-const Routes = () => {
+const Routes = (props) => {
   return (
     <Switch>
       <Redirect
@@ -30,60 +30,70 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/maps"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={UserListView}
         exact
         layout={MainLayout}
         path="/users"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={ProductListView}
         exact
         layout={MainLayout}
         path="/products"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={TypographyView}
         exact
         layout={MainLayout}
         path="/typography"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={IconsView}
         exact
         layout={MainLayout}
         path="/icons"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={AccountView}
         exact
         layout={MainLayout}
         path="/account"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={SettingsView}
         exact
         layout={MainLayout}
         path="/settings"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
         path="/sign-up"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={SignInView}
         exact
         layout={MinimalLayout}
         path="/sign-in"
+        current_user = {props.current_user}
       />
       <RouteWithLayout
         component={NotFoundView}
         exact
         layout={MinimalLayout}
         path="/not-found"
+        current_user = {props.current_user}
       />
       <Redirect to="/not-found" />
     </Switch>

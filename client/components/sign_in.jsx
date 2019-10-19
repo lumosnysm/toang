@@ -100,6 +100,13 @@ export default function SignIn(props) {
         >
           Sign In
         </Button>
+        <Grid container justify="flex-end">
+            <Grid item>
+              <Link variant="body2" onClick={props.openSignUp}>
+                No have an account? Sign up
+              </Link>
+            </Grid>
+          </Grid>
       </form>
     </div>
   );
