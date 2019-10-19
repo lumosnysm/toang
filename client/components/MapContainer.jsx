@@ -17,7 +17,11 @@ class MapContainer extends React.Component {
     this.state = {
       open: false,
       current_user: '',
-      nodes_array: []
+      nodes_array: [],
+      from_lat: 0,
+      to_lat: 0,
+      from_lng: 0,
+      to_lng: 0
     }
   }
 
@@ -25,12 +29,17 @@ class MapContainer extends React.Component {
     this.setState({
       current_user: this.props.current_user
     });
-    this.onLoadNodes();
+    this.getNewData();
   }
 
   onLoadNodes = () => {
     axios.get(path.get_nodes(), {
-      params: {lat: 21.027763, lng: 105.834160}
+      params: {
+        from_lat: this.state.from_lat,
+        to_lat: this.state.to_lat,
+        from_lng: this.state.from_lng,
+        to_lng: this.state.to_lng
+      }
     }).then(res => {
       this.setState({nodes_array: res.data.nodes})
     });
@@ -83,8 +92,16 @@ class MapContainer extends React.Component {
     else return "brown"
   }
 
-  get_new_data = () => {
-    console.log(getCenter());
+  getNewData = () => {
+    var data;
+    data = this.refs.map.leafletElement.getBounds()
+    this.setState({
+      from_lat: data._southWest.lat,
+      to_lat: data._northEast.lat,
+      from_lng: data._southWest.lng,
+      to_lng: data._northEast.lng
+      }, () => this.onLoadNodes()
+    )
   }
 
   render() {
@@ -110,6 +127,7 @@ class MapContainer extends React.Component {
           <Grid item xs={8} className={classes.maps}>
             <Map
               center={[21.027763, 105.834160]}
+              ref = 'map'
               zoom={12}
               attributionControl={true}
               zoomControl={true}
@@ -118,7 +136,7 @@ class MapContainer extends React.Component {
               dragging={true}
               animate={true}
               easeLinearity={0.35}
-              onMoveEnd={this.get_new_data()}
+              onMoveEnd={this.getNewData}
             >
               <TileLayer
                 url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
