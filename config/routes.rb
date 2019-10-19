@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   }
   resources :maps
   get 'hello_world', to: 'hello_world#index'
-  get "nodes_nearby_data", to: "maps_controller#nodes_nearby_data"
+  get "nodes_nearby_data", to: "maps#nodes_nearby_data"
 end
