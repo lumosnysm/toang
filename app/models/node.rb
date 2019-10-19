@@ -4,4 +4,6 @@ class Node < ApplicationRecord
   after_validation :reverse_geocode
 
   has_many :air_infos
+
+  scope :find_by_position, -> (from_lat, to_lat, from_lng, to_lng) {where latitude: from_lat..to_lat, longitude: from_lng..to_lng}
 end
