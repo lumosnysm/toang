@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
 
   create_table "air_infos", force: :cascade do |t|
     t.bigint "node_id"
-    t.string "city"
-    t.string "country"
+    t.string "location"
     t.integer "ts"
     t.integer "hu"
     t.integer "pr"
@@ -32,8 +31,9 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
 
   create_table "nodes", force: :cascade do |t|
     t.bigint "user_id"
-    t.float "x"
-    t.float "y"
+    t.string "location"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_nodes_on_user_id"
   end
 

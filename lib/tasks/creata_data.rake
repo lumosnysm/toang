@@ -30,19 +30,23 @@ namespace :create_data do
 
   task node: :environment do
     NUM_ADMIN_NODES.times do
-      x, y = RandomLocation.near_by(21.0333, 105.85, 1000) #Hanoi cordinates
+      radius = rand(1000..50000)
+      latitude, longitude = RandomLocation.near_by(21.0333, 105.85, radius) #Hanoi cordinates
       node = Node.create({
         user_id: User.first.id,
-        x: x,
-        y: y
+        latitude: latitude,
+        longitude: longitude
       })
       node.save!
     end
 
     NUM_USER_NODES.times do
-      x, y = RandomLocation.near_by(21.0333, 105.85, 1000) #Hanoi cordinates
+      radius = rand(1000..10000)
+      latitude, longitude = RandomLocation.near_by(21.0333, 105.85, radius) #Hanoi cordinates
       node = Node.create({
-        user_id: User.where.not(id: User.first.id).ids.sample
+        user_id: User.where.not(id: User.first.id).ids.sample,
+        latitude: latitude,
+        longitude: longitude
       })
       node.save!
     end
@@ -50,10 +54,10 @@ namespace :create_data do
 
   task air_info: :environment do
     NUM_DATA.times do
+      node = Node.all.sample
       data = AirInfo.create({
-        node_id: Node.ids.sample,
-        city: "Hanoi",
-        country: "Vietnam",
+        node_id: node.id,
+        location: node.location,
         hu: rand(78..98),
         pr: rand(900..1100),
         tp: rand(8..28),

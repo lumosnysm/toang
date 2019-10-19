@@ -2,8 +2,7 @@ class CreateAirInfos < ActiveRecord::Migration[5.2]
   def change
     create_table :air_infos do |t|
       t.references :node
-      t.string :city
-      t.string :country
+      t.string :location
       t.integer :ts
       t.integer :hu
       t.integer :pr
