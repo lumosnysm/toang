@@ -10,6 +10,7 @@ import Modal from '@material-ui/core/Modal';
 import SignUp from './sign_up'
 import SignIn from './sign_in'
 import { mapStyles } from './map_styles';
+import { UsersByDevice } from '../../react-material-dashboard/src/views/Dashboard/components';
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -117,32 +118,50 @@ class MapContainer extends React.Component {
     }
 
     return (
-
-      <Map
-        center={[21.027763, 105.834160]}
-        ref = 'map'
-        zoom={12}
-        attributionControl={true}
-        zoomControl={true}
-        doubleClickZoom={true}
-        scrollWheelZoom={true}
-        dragging={true}
-        animate={true}
-        easeLinearity={0.35}
-        onMoveEnd={this.getNewData}
-      >
-        <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        />
-        { this.state.nodes_array && this.state.nodes_array.map((node, index) =>
-          <Circle
-            key={index}
-            center={{lat: node.latitude, lng: node.longitude}}
-            fillColor={this.calColor(node.aqius)}
-            stroke={false}
-            radius={500}/>
-        )}
-      </Map>
+      <React.Fragment>
+        <Grid
+            item
+            lg={8}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <Map
+              center={[21.027763, 105.834160]}
+              ref = 'map'
+              zoom={12}
+              attributionControl={true}
+              zoomControl={true}
+              doubleClickZoom={true}
+              scrollWheelZoom={true}
+              dragging={true}
+              animate={true}
+              easeLinearity={0.35}
+              onMoveEnd={this.getNewData}
+            >
+              <TileLayer
+                url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+              />
+              { this.state.nodes_array && this.state.nodes_array.map((node, index) =>
+                <Circle
+                  key={index}
+                  center={{lat: node.latitude, lng: node.longitude}}
+                  fillColor={this.calColor(node.aqius)}
+                  stroke={false}
+                  radius={500}/>
+              )}
+            </Map>
+          </Grid>
+          <Grid
+            item
+            lg={4}
+            md={6}
+            xl={3}
+            xs={12}
+          >
+            <UsersByDevice calColor={this.calColor} nodes_array={this.state.nodes_array}  />
+          </Grid>
+        </React.Fragment>
     );
   }
 }

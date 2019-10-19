@@ -65,24 +65,7 @@ const Dashboard = () => {
         >
           <TotalProfit />
         </Grid>
-        <Grid
-          item
-          lg={8}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <MapContainer />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          md={6}
-          xl={3}
-          xs={12}
-        >
-          <UsersByDevice />
-        </Grid>
+        <MapContainer />
         <Grid
           item
           lg={4}
