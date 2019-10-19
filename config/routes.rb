@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  root to: "maps#index"
+
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
   resources :maps
-  get 'hello_world', to: 'hello_world#index'
 end
