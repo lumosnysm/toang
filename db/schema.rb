@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2019_10_18_195018) do
     t.string "location"
     t.float "latitude"
     t.float "longitude"
+    t.integer "aqius"
+    t.integer "aqicn"
     t.index ["user_id"], name: "index_nodes_on_user_id"
   end
 

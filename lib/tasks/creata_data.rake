@@ -5,7 +5,7 @@ desc "Load fake data for development/testing."
 NUM_USERS = 10
 NUM_ADMIN_NODES = 100
 NUM_USER_NODES = 100
-NUM_DATA = 100
+NUM_DATA = 200
 
 namespace :create_data do
   task users: :environment do
@@ -13,7 +13,7 @@ namespace :create_data do
       name: FFaker::Name.name,
       email:"admin@toang.com",
       password: "123456",
-      type_id: [0, 1, 2].sample
+      type_id: 3
     })
     admin.save!
 
@@ -22,7 +22,7 @@ namespace :create_data do
         name: FFaker::Name.name,
         email: FFaker::Internet.email,
         password: "123456",
-        type_id: [0, 1, 2].sample
+        type_id: 2
       })
       user.save!
     end
@@ -53,8 +53,8 @@ namespace :create_data do
   end
 
   task air_info: :environment do
-    NUM_DATA.times do
-      node = Node.all.sample
+    (1..NUM_DATA).each do |index|
+      node = Node.find_by id: index
       data = AirInfo.create({
         node_id: node.id,
         location: node.location,
