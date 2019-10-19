@@ -5,6 +5,8 @@ class CreateNodes < ActiveRecord::Migration[5.2]
       t.string :location
       t.float :latitude
       t.float :longitude
+      t.integer :aqius
+      t.integer :aqicn
     end
   end
 end
