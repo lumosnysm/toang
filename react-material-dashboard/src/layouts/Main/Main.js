@@ -50,9 +50,10 @@ const Main = props => {
         [classes.shiftContent]: isDesktop
       })}
     >
-      <Topbar onSidebarOpen={handleSidebarOpen} />
+      <Topbar onSidebarOpen={handleSidebarOpen} current_user = {props.current_user} />
       <Sidebar
         onClose={handleSidebarClose}
+        current_user = {props.current_user}
         open={shouldOpenSidebar}
         variant={isDesktop ? 'persistent' : 'temporary'}
       />

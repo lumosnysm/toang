@@ -9,7 +9,7 @@ const RouteWithLayout = props => {
     <Route
       {...rest}
       render={matchProps => (
-        <Layout>
+        <Layout current_user = {props.current_user} >
           <Component {...matchProps} />
         </Layout>
       )}
