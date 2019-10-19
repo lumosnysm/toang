@@ -1,8 +1,6 @@
 export const mapStyles = theme => ({
   maps: {
     margin: '1%',
-    height: '800px',
-    width: '60%',
   },
 });
 

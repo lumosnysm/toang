@@ -117,54 +117,30 @@ class MapContainer extends React.Component {
     }
 
     return (
-      <div>
-        <Appbar
-          openModal ={this.openModal}
-          current_user = {this.state.current_user}
-          logout = {this.logout}
+      <Map
+        center={[21.027763, 105.834160]}
+        zoom={12}
+        attributionControl={true}
+        zoomControl={true}
+        doubleClickZoom={true}
+        scrollWheelZoom={true}
+        dragging={true}
+        animate={true}
+        easeLinearity={0.35}
+        onMoveEnd={this.get_new_data()}
+      >
+        <TileLayer
+          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
-        <Grid container spacing={2}>
-          <Grid item xs={8} className={classes.maps}>
-            <Map
-              center={[21.027763, 105.834160]}
-              ref = 'map'
-              zoom={12}
-              attributionControl={true}
-              zoomControl={true}
-              doubleClickZoom={true}
-              scrollWheelZoom={true}
-              dragging={true}
-              animate={true}
-              easeLinearity={0.35}
-              onMoveEnd={this.getNewData}
-            >
-              <TileLayer
-                url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-              />
-              { this.state.nodes_array && this.state.nodes_array.map((node, index) =>
-                <Circle
-                  key={index}
-                  center={{lat: node.latitude, lng: node.longitude}}
-                  fillColor={this.calColor(node.aqius)}
-                  stroke={false}
-                  radius={500}/>
-              )}
-            </Map>
-          </Grid>
-          <Grid item xs={3}>
-            {rightMenu}
-          </Grid>
-        </Grid>
-
-        <Modal
-          className={classes.modal}
-          open={this.state.open}
-          onClose={this.handleCloseModal}
-          disableAutoFocus
-        >
-          <SignIn handleSignIn = {this.handleSignIn} />
-        </Modal>
-      </div>
+        { this.state.nodes_array && this.state.nodes_array.map((node, index) =>
+          <Circle
+            key={index}
+            center={{lat: node.latitude, lng: node.longitude}}
+            fillColor={this.calColor(node.aqius)}
+            stroke={false}
+            radius={500}/>
+        )}
+      </Map>
     );
   }
 }
