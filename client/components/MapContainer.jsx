@@ -117,8 +117,10 @@ class MapContainer extends React.Component {
     }
 
     return (
+
       <Map
         center={[21.027763, 105.834160]}
+        ref = 'map'
         zoom={12}
         attributionControl={true}
         zoomControl={true}
@@ -127,7 +129,7 @@ class MapContainer extends React.Component {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
-        onMoveEnd={this.get_new_data()}
+        onMoveEnd={this.getNewData}
       >
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
