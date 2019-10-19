@@ -4,7 +4,7 @@ class MapsController < ApplicationController
   end
 
   def nodes_nearby_data
-    nodes = Node.near([params[:lat], params[:long]], 10, :order => "distance").first(50)
+    nodes = Node.near([params[:lat], params[:lng]], 10, :order => "distance").first(50)
     
     render json: {
       nodes: nodes.as_json(only: [:latitude, :longitude, :aqius, :aqicn])

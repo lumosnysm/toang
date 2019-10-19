@@ -17,13 +17,23 @@ class MapContainer extends React.Component {
     this.state = {
       open: false,
       current_user: '',
+      nodes_array: []
     }
   }
 
   componentDidMount() {
     this.setState({
       current_user: this.props.current_user
-    })
+    });
+    this.onLoadNodes();
+  }
+
+  onLoadNodes = () => {
+    axios.get(path.get_nodes(), {
+      params: {lat: 21.027763, lng: 105.834160}
+    }).then(res => {
+      this.setState({nodes_array: res.data.nodes})
+    });
   }
 
   openModal = () => {
@@ -64,6 +74,19 @@ class MapContainer extends React.Component {
     });
   }
 
+  calColor = (aqi) => {
+    if (aqi < 50 ) return "green";
+    else if (aqi < 100) return "yellow";
+    else if (aqi < 150) return "orange";
+    else if (aqi < 200) return "red";
+    else if (aqi < 300) return "purple";
+    else return "brown"
+  }
+
+  get_new_data = () => {
+    console.log(getCenter());
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -95,18 +118,19 @@ class MapContainer extends React.Component {
               dragging={true}
               animate={true}
               easeLinearity={0.35}
+              onMoveEnd={this.get_new_data()}
             >
               <TileLayer
                 url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
               />
-              <Circle
-                center={{lat:21.027763, lng:105.834160}}
-                fillColor="blue"
-                radius={1200}/>
-              <Circle
-                center={{lat:21.017650, lng:105.783963}}
-                fillColor="red"
-                radius={1000}/>
+              { this.state.nodes_array && this.state.nodes_array.map((node, index) =>
+                <Circle
+                  key={index}
+                  center={{lat: node.latitude, lng: node.longitude}}
+                  fillColor={this.calColor(node.aqius)}
+                  stroke={false}
+                  radius={500}/>
+              )}
             </Map>
           </Grid>
           <Grid item xs={3}>
