@@ -44,21 +44,26 @@ const UsersByDevice = props => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const color_data = props.nodes_array.map(n=>props.calColor(n.aqius))
+  let final_data = [].concat(color_data.filter(x => x==='green').length)
+    .concat(color_data.filter(x => x==='yellow').length)
+    .concat(color_data.filter(x => x==='orange').length)
+    .concat(color_data.filter(x => x==='red').length)
+    .concat(color_data.filter(x => x==='purple').length)
+
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: final_data,
         backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.error.main,
-          theme.palette.warning.main
+          'green', 'yellow', 'orange', 'red', 'purple'
         ],
         borderWidth: 8,
         borderColor: theme.palette.white,
         hoverBorderColor: theme.palette.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['good', 'moderate', 'unhealthy', 'unhealthy++', 'very unhealthy']
   };
 
   const options = {
@@ -83,25 +88,35 @@ const UsersByDevice = props => {
     }
   };
 
+
+  console.log(final_data)
+
   const devices = [
     {
-      title: 'Desktop',
-      value: '63',
-      icon: <LaptopMacIcon />,
-      color: theme.palette.primary.main
+      title: '',
+      value: final_data[0]/props.nodes_array.length *100 || 0,
+      color: 'green'
     },
     {
-      title: 'Tablet',
-      value: '15',
-      icon: <TabletMacIcon />,
-      color: theme.palette.error.main
+      title: '',
+      value: final_data[1]/props.nodes_array.length *100 || 0,
+      color: 'yellow'
     },
     {
-      title: 'Mobile',
-      value: '23',
-      icon: <PhoneIphoneIcon />,
-      color: theme.palette.warning.main
-    }
+      title: '',
+      value: final_data[2]/props.nodes_array.length *100 || 0,
+      color: 'orange'
+    },
+    {
+      title: '',
+      value: final_data[3]/props.nodes_array.length *100 || 0,
+      color: 'red'
+    },
+    {
+      title: '',
+      value: final_data[4]/props.nodes_array.length *100 || 0,
+      color: 'purple'
+    },
   ];
 
   return (
@@ -115,7 +130,7 @@ const UsersByDevice = props => {
             <RefreshIcon />
           </IconButton>
         }
-        title="Users By Device"
+        title="Total Node"
       />
       <Divider />
       <CardContent>
